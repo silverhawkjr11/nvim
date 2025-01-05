@@ -63,3 +63,6 @@ vim.keymap.set("n", "<RightMouse>", function()
   local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
   require("menu").open(options, { mouse = true })
 end, {})
+
+-- return in normal mode makes a  new line and goes back to normal mode
+vim.api.nvim_set_keymap("n", "<CR>", "o<Esc>", { noremap = true, silent = true })
