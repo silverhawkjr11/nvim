@@ -3,6 +3,8 @@
 -- Add any additional keymaps here
 -- make <C-up> and <C-down> move the current line or visual selection up or down in normal, visual and insert mode
 local lspconfig = require("lspconfig")
+
+local dap = require("dap")
 local dart = require("plugins.dart")
 vim.lsps = lspconfig
 vim.api.nvim_set_keymap("n", "<A-Up>", ":m .-2<CR>==", { noremap = true, silent = true })
@@ -66,3 +68,9 @@ end, {})
 
 -- return in normal mode makes a  new line and goes back to normal mode
 vim.api.nvim_set_keymap("n", "<CR>", "o<Esc>", { noremap = true, silent = true })
+-- In your debugging.lua config:
+vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Debug: Continue/Start" })
+vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Debug: Step Over" })
+vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debug: Step Into" })
+vim.keymap.set("n", "<leader>ds", dap.step_out, { desc = "Debug: Step Out" })
