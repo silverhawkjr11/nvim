@@ -1,16 +1,19 @@
+-- lua/plugins/copilot-chat-remap.lua
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-      { "github/copilot.vim" },
+    -- make sure you're on main (not canary) to match LazyVim docs
+    branch = "main",
+    keys = {
+      -- Replace the broken call to require("CopilotChat").select_prompt()
+      {
+        "<leader>ap",
+        function()
+          vim.cmd("CopilotChatPrompts")
+        end,
+        desc = "Prompt Actions (CopilotChat)",
+        mode = { "n", "v" },
+      },
     },
-    opts = {
-      debug = true, -- Enable debugging
-      -- See Configuration section for rest
-    },
-    -- See Commands section for default commands if you want to lazy load on them
   },
 }

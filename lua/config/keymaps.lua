@@ -76,4 +76,41 @@ vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debug: Step Into" })
 vim.keymap.set("n", "<leader>ds", dap.step_out, { desc = "Debug: Step Out" })
 
 -- leader ff opens Telescope find_files
-vim.keymap.set("n", "<leader>ff", ":Telescope file_browser<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<leader>ff", ":Telescope file_browser<CR>", { noremap = true, silent = true })
+
+-- keymap to launch file_browser at current file's folder
+
+-- load once, e.g. in your telescope setup file
+-- Correct way to require the actions
+local fb_actions = require("telescope._extensions.file_browser.actions")
+
+-- Your existing code with the fix
+vim.keymap.set("n", "<leader>ff", function()
+  local telescope = require("telescope")
+  local fb = telescope.extensions.file_browser
+
+  fb.file_browser({
+    path = vim.fn.expand("%:p:h"),
+    cwd = vim.fn.expand("%:p:h"),
+    hidden = true,
+    grouped = true,
+    previewer = false,
+    initial_mode = "insert",
+    layout_config = { height = 40 },
+    mappings = {
+      ["n"] = {
+        -- parent dir
+        ["h"] = fb_actions.goto_parent_dir,
+        ["<BS>"] = fb_actions.goto_parent_dir,
+        -- create (this should work now)
+        ["c"] = fb_actions.create,
+      },
+      ["i"] = {
+        -- parent dir from insert
+        ["<A-h>"] = fb_actions.goto_parent_dir,
+        -- create from insert
+        ["<A-c>"] = fb_actions.create,
+      },
+    },
+  })
+end, { noremap = true, silent = true, desc = "Telescope File Browser (here)" })
