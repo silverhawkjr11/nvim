@@ -10,7 +10,6 @@ return {
       "mfussenegger/nvim-dap-python", -- Python
       "leoluz/nvim-dap-go", -- Go
       "mxsdev/nvim-dap-vscode-js", -- JavaScript/TypeScript
-      "mfussenegger/nvim-jdtls", -- Java
       "theHamsta/nvim-dap-virtual-text", -- Adds virtual text support
     },
     keys = {
@@ -74,8 +73,7 @@ return {
         executable = {
           command = "node",
           args = {
-            require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-              .. "/js-debug/src/dapDebugServer.js",
+            os.getenv("HOME") .. "/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
             "${port}",
           },
         },
@@ -153,7 +151,7 @@ return {
       dap.configurations.c = dap.configurations.cpp
       dap.configurations.rust = dap.configurations.cpp
 
-      -- Java configuration is handled by nvim-jdtls
+      -- Java configuration is handled by nvim-java
     end,
   },
   {

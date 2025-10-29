@@ -18,6 +18,8 @@ vim.api.nvim_set_keymap("n", "<C-a>", "ggVG", { noremap = true, silent = true })
 
 -- Assuming you have 'folke/todo-comments.nvim' installed via lazy.nvim
 vim.keymap.set("n", "<leader>t", "<cmd>TodoTelescope<CR>", { desc = "Open TodoTelescope" })
+-- for telescope find buffers
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
 vim.keymap.set("x", "<leader>re", ":Refactor extract ")
 vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
 
