@@ -3,18 +3,7 @@ return {
   ---@class PluginLspOpts
   opts = {
     servers = {
-      clangd = {
-        cmd = { "clangd", "--background-index" },
-        filetypes = { "c", "cpp", "objc", "objcpp" },
-        root_dir = require("lspconfig.util").root_pattern(".git", "compile_commands.json"),
-        settings = {
-          ccls = {
-            completion = {
-              filterAndSort = false,
-            },
-          },
-        },
-      },
+      -- clangd configuration removed - handled by cpp.lua LazyVim extras
       dartls = {
         cmd = { "dart", "/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot", "--lsp" },
         filetypes = { "dart" },
